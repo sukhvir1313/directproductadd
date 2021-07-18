@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+  <system>
+    <tab id="sukhvirconfig" translate="label comment">
+      <label>Sukhvir</label>
+    </tab>
+    <section id="sukhvirdirectproductadd" translate="label comment" sortOrder="99999" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Direct Product Add</label>
+      <tab>sukhvirconfig</tab>
+      <resource>Sukhvir_DirectProductAdd::system_config</resource>
+      <group id="general" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>General</label>
+        <field id="redirects" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Redirect to</label>
+          <source_model>Sukhvir\DirectProductAdd\Model\Config\Source\ListMode</source_model>
+          <comment><![CDATA[Users will be redirected to above page once they land to one of the given "Direct Product Add" urls (You can format url in any of the below format as per your need):<ul><li>http://{yourdomain}/dpa/add/tocart/sku/{product_sku}</li><li>http://{yourdomain}/dpa/add/tocart/sku/{product_sku}/coupon/{coupon_code}</li><li>http://{yourdomain}/dpa/add/tocart/sku/{product_sku}-{quantity}</li><li>http://{yourdomain}/dpa/add/tocart/sku/{product_sku_1},{product_sku_2}</li><li>http://{yourdomain}/dpa/add/tocart/id/{product_sku_1}-{quantity},{product_sku_2}-{quantity}</li><li>http://{yourdomain}/dpa/add/tocart/id/{product_id}</li><li>http://{yourdomain}/dpa/add/tocart/id/{product_id}-{quantity}</li><li>http://{yourdomain}/dpa/add/tocart/id/{product_1_id},{product_2_id}</li><li>http://{yourdomain}/dpa/add/tocart/id/{product_1_id}-{product_1_quantity},{product_2_id}-{product_2_quantity}</li></ul><br/>Notes:<ol><li>Please use simple product's id or sku. For configurable product id/sku, it will be redirected to product page.</li><li>Please use product id/sku of relevant store, otherwise user will be redirected to home page.</li></ol>]]></comment>
+        </field>
+      </group>
+    </section>
+  </system>
+</config>
