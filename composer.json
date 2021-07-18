@@ -7,7 +7,7 @@
     "type": "magento2-module",
     "version": "1.0.5",
     "license": [
-        "Proprietary"
+        "Apache-2.0"
     ],
     "autoload": {
         "files": [
@@ -16,5 +16,12 @@
         "psr-4": {
             "Sukhvir\\DirectProductAdd\\": ""
         }
-    }
+    },
+    "authors": [
+        {
+            "name": "Sukhvir Kushwah",
+            "email": "kushwahsukhvir@gmail.com",
+            "role": "Developer"
+        }
+    ]
 }
