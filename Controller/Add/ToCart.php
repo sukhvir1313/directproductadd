@@ -30,6 +30,20 @@ class ToCart extends \Magento\Framework\App\Action\Action
         $product_id = $this->_request->getParam('id');
         $coupon = $this->_request->getParam('coupon');
         $sku = $this->_request->getParam('sku');
+        $empty = $this->_request->getParam('empty');
+
+        if ($empty) {
+            try {
+                $allItems = $this->_cart->getQuote()->getAllVisibleItems();
+                foreach ($allItems as $item) {
+                    $itemId = $item->getItemId();
+                    $this->_cart->removeItem($itemId);
+                }
+            } catch (\Exception $e) {
+
+            }
+        }
+        
         try {
             $this->addToCart($product_id, $coupon, $sku);
         } catch (\Exception $e) {
