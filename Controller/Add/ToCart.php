@@ -60,13 +60,13 @@ class ToCart extends \Magento\Framework\App\Action\Action
                         foreach($carr as $p){
                             $p = trim($p);
                             $q = 1;
-                            $this->toCart($p,$q);
+                            $this->toCart($p,$q, false);
                         }
                     }
                 }else{
                     $p = trim($product_id);
                     $q = 1;
-                    $this->toCart($p,$q);
+                    $this->toCart($p,$q, false);
                 }
             }
 
@@ -101,8 +101,14 @@ class ToCart extends \Magento\Framework\App\Action\Action
     private function toCart($p,$q, $is_sku){
     	if(strpos($p,"-")!==FALSE){
     		$aq = explode("-",$p);
-    		$p = $aq[0];
-    		$q = (int)$aq[1];
+    		
+            if (is_numeric($aq[1])) {
+                $p = $aq[0];
+                $q = (int)$aq[1];
+            } else {
+                $q = 1;
+            }
+    		
     	}
     	$params = array(
             'product' => $p,
