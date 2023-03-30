@@ -2,10 +2,10 @@
     "name": "sukhvir1313/directproductadd",
     "description": "Share link http://{yourdomain}/dpa/add/tocart/sku/{product_sku}, http://{yourdomain}/dpa/add/tocart/sku/{product_sku}/coupon/{coupon_code}, http://{yourdomain}/dpa/add/tocart/sku/{product_sku}-{quantity}, http://{yourdomain}/dpa/add/tocart/sku/{product_sku_1},{product_sku_2}, http://{yourdomain}/dpa/add/tocart/id/{product_sku_1}-{quantity},{product_sku_2}-{quantity}, http://{yourdomain}/dpa/add/tocart/id/{product_id}, http://{yourdomain}/dpa/add/tocart/id/{product_id}-{quantity}, http://{yourdomain}/dpa/add/tocart/id/{product_id_1},{product_id_2} OR http://{yourdomain}/dpa/add/tocart/id/{product_id_1}-{quantity},{product_id_2}-{quantity} with your users through email, share media, blogs etc. Once user clicks on this link product will be automatically added to cart and user will be redirected to checkout page.",
     "require": {
-        "php": "~5.5.0|~5.6.0|~7.0.0|~7.1.0|~7.2.0|~7.3.0|~7.4.0|~8.1.0"
+        "php": "~5.5.0|~5.6.0|~7.0.0|~7.1.0|~7.2.0|~7.3.0|~7.4.0|~8.1.0|~8.2.0|~8.3.0"
     },
     "type": "magento2-module",
-    "version": "1.0.9",
+    "version": "1.1.1",
     "license": [
         "Apache-2.0"
     ],
