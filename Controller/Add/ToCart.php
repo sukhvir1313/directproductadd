@@ -53,49 +53,54 @@ class ToCart extends \Magento\Framework\App\Action\Action
 
     public function addToCart($product_id, $coupon, $sku){
 
-            if(isset($product_id) && !empty($product_id)) {
-                if(strpos($product_id,",")!==FALSE){
-                    $carr = explode(",",$product_id);
-                    if(is_array($carr)){
-                        foreach($carr as $p){
-                            $p = trim($p);
-                            $q = 1;
-                            $this->toCart($p,$q, false);
-                        }
+        $response = array();
+        if(isset($product_id) && !empty($product_id)) {
+            if(strpos($product_id,",")!==FALSE){
+                $carr = explode(",",$product_id);
+                if(is_array($carr)){
+                    foreach($carr as $p){
+                        $p = trim($p);
+                        $q = 1;
+                        $response = $this->toCart($p,$q, false);
                     }
-                }else{
-                    $p = trim($product_id);
-                    $q = 1;
-                    $this->toCart($p,$q, false);
                 }
+            }else{
+                $p = trim($product_id);
+                $q = 1;
+                $response = $this->toCart($p,$q, false);
             }
+        }
 
-            if(isset($sku) && !empty($sku)) {
-                if(strpos($sku,",")!==FALSE){
-                    $carr = explode(",",$sku);
-                    if(is_array($carr)){
-                        foreach($carr as $p){
-                            $p = trim($p);
-                            $q = 1;
-                            $this->toCart($p,$q, true);
-                        }
+        if(isset($sku) && !empty($sku)) {
+            if(strpos($sku,",")!==FALSE){
+                $carr = explode(",",$sku);
+                if(is_array($carr)){
+                    foreach($carr as $p){
+                        $p = trim($p);
+                        $q = 1;
+                        $response = $this->toCart($p,$q, true);
                     }
-                }else{
-                    $p = trim($sku);
-                    $q = 1;
-                    $this->toCart($p,$q, true);
                 }
+            }else{
+                $p = trim($sku);
+                $q = 1;
+                $response = $this->toCart($p,$q, true);
             }
-            
+        }
+        
 
-            if (isset($coupon) && !empty($coupon)) {
-                $this->_cart->getQuote()->setCouponCode($coupon);
-            }
-            
-            $this->_cart->save();
+        if (isset($coupon) && !empty($coupon)) {
+            $this->_cart->getQuote()->setCouponCode($coupon);
+        }
+        
+        $this->_cart->save();
 
-        	$redirect = $this->_scopeConfig->getValue('sukhvirdirectproductadd/general/redirects', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        	$this->_redirect($redirect);
+        if ($response['status'] == false && $response['redirect_url']) {
+            $this->_redirect($response['redirect_url']);
+        } else {
+            $redirect = $this->_scopeConfig->getValue('sukhvirdirectproductadd/general/redirects', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+            $this->_redirect($redirect);
+        }
     }
     
     private function toCart($p,$q, $is_sku){
@@ -120,7 +125,39 @@ class ToCart extends \Magento\Framework\App\Action\Action
         } else {
             $_product = $this->_productRepository->getById($p);
         }
+
+        // check if product is simple product or not
+        if ($_product->getTypeId() != 'simple') {
+            return array(
+                'status' => false,
+                'message' => 'Redirect to product page',
+                'redirect_url' => $_product->getProductUrl()
+            );
+        }
+
+        // check if product has customizable options
+        $customOptions = $_product->getOptions();
+
+        if (count($customOptions) > 0) {
+            return array(
+                'status' => false,
+                'message' => 'Redirect to product page',
+                'redirect_url' => $_product->getProductUrl()
+            );
+        }
+
+        // check if product is out of stock
+        if (!$_product->isSaleable()) {
+            return array(
+                'status' => false,
+                'message' => 'Redirect to product page',
+                'redirect_url' => $_product->getProductUrl()
+            );
+        }
         
-        $this->_cart->addProduct($_product,$params);
+        $result = $this->_cart->addProduct($_product,$params);
+        return array(
+            'status' => true,
+        );
    }
 }
