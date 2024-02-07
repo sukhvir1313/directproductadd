@@ -1,7 +1,7 @@
 # Direct Product Add to Cart
 
 
-What if you want to send your customers a link and grant them the ability to quickly add products to the cart, instantly redirecting them to the cart or checkout page, all just be clicking on the link? Great idea! right? "Direct Product Add" is a perfect solution for you. Just share a link with your users through email, social media, blogs etc. Once user clicks on this link, the product will be automatically added to the cart and the user will be redirected to the cart or checkout page. You can change the redirection page from the admin section. Direct Product Add extension will reduce the required steps for your users and cause your revenue to increase.
+What if you want to send your customers a link and grant them the ability to quickly add products to the cart, instantly redirecting them to the cart or checkout page, all just be clicking on the link? Great idea! right? "Direct Product Add" is a perfect solution for you. Just share a link with your users through email, social media, blogs etc. Once user clicks on this link, the product will be automatically added to the cart and the user will be redirected to the cart or checkout page. You can change the redirection page from the admin section. Direct Product Add extension will reduce the required steps for your users and cause your revenue to increase. Download from  [https://commercemarketplace.adobe.com/sukhvir-directproductadd.html](https://commercemarketplace.adobe.com/sukhvir-directproductadd.html)
 
 ### URL Formats:
 
