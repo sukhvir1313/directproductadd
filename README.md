@@ -106,5 +106,5 @@ Curious to see how it works? Check out our detailed demo video on YouTube:
 
 ## **Live Demo Link**
 
-Experience the extension yourself with this demo link. It will directly add a product with ID `1` to the cart and redirect you to the checkout page:  
+Experience the extension yourself with this demo link. It will directly add a product with sku `24-MB01` to the cart and redirect you to the checkout page:  
 [Try It Now](https://magento-demo-247p3.chlamyssoftware.com/dpa/add/tocart/sku/24-MB01)
