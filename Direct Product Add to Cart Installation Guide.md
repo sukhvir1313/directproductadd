@@ -1,7 +1,3 @@
-Here’s the enhanced version of the installation guide with improved clarity and formatting for readability:
-
----
-
 # **Direct Product Add to Cart Installation Guide**
 
 ## **Using Composer**
@@ -120,7 +116,3 @@ Stores -> Configuration -> SUKHVIR -> Direct Product Add
 ## **Notes**
 1. **Only Use Simple Products**: For configurable product IDs, the user will be redirected to the product page.
 2. **Store-Specific SKUs/IDs**: Ensure you use SKUs/IDs that are valid for the relevant store. Invalid SKUs/IDs will redirect users to the homepage.
-
----
-
-Let me know if further adjustments are needed or if you’d like additional sections!
