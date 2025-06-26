@@ -104,26 +104,39 @@ class ToCart extends \Magento\Framework\App\Action\Action
     }
     
     private function toCart($p,$q, $is_sku){
-    	if(strpos($p,"-")!==FALSE){
-    		$aq = explode("-",$p);
-    		
-            if (is_numeric($aq[1])) {
-                $p = $aq[0];
-                $q = (int)$aq[1];
-            } else {
-                $q = 1;
+        $qty = $q;
+        $code = $p;
+
+        if (strpos($p, "-") !== false) {
+            $lastHyphen = strrpos($p, "-");
+            $maybeQty = substr($p, $lastHyphen + 1);
+            $possibleCode = substr($p, 0, $lastHyphen);
+
+            if (ctype_digit($maybeQty)) {
+                if ($is_sku) {
+                    try {
+                        // Check if SKU with quantity part actually exists
+                        $this->_productRepository->get($p);
+                    } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+                        $code = $possibleCode;
+                        $qty = (int)$maybeQty;
+                    }
+                } else {
+                    $code = $possibleCode;
+                    $qty = (int)$maybeQty;
+                }
             }
-    		
-    	}
-    	$params = array(
-            'product' => $p,
-      	    'qty' => $q
+        }
+
+        $params = array(
+            'product' => $code,
+            'qty' => $qty
         );
 
         if (isset($is_sku) && $is_sku == true) {
-            $_product = $this->_productRepository->get($p);
+            $_product = $this->_productRepository->get($code);
         } else {
-            $_product = $this->_productRepository->getById($p);
+            $_product = $this->_productRepository->getById($code);
         }
 
         // check if product is simple product or not

@@ -17,10 +17,13 @@ The Direct Product Add extension supports a variety of URL formats, making it fl
    http://{yourdomain}/dpa/add/tocart/sku/{product_sku}
    ```
 
-2. **Add a Product with a Specific Quantity**  
+2. **Add a Product with a Specific Quantity**
    ```
    http://{yourdomain}/dpa/add/tocart/sku/{product_sku}-{quantity}
    ```
+   *If the SKU itself contains hyphens, append the quantity as an additional
+   `-number` segment (for example `24-MB01-2`). The module checks whether the
+   complete SKU exists before interpreting the trailing number as the quantity.*
 
 3. **Add Multiple Products with Quantities**  
    ```
