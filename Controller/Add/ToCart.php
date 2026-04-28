@@ -112,12 +112,21 @@ class ToCart extends \Magento\Framework\App\Action\Action
             $maybeQty = substr($p, $lastHyphen + 1);
             $possibleCode = substr($p, 0, $lastHyphen);
 
-            if (ctype_digit($maybeQty)) {
+            if ($maybeQty !== '' && ctype_digit($maybeQty) && (int)$maybeQty > 0) {
                 if ($is_sku) {
+                    // Only treat the trailing "-NN" as a quantity when the
+                    // full SKU (including the "-NN" segment) does NOT exist
+                    // in the catalog. Otherwise SKUs that legitimately end
+                    // in "-<number>" (e.g. "t-ora-75") would be unreachable.
+                    $fullSkuExists = false;
                     try {
-                        // Check if SKU with quantity part actually exists
                         $this->_productRepository->get($p);
-                    } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+                        $fullSkuExists = true;
+                    } catch (\Exception $e) {
+                        $fullSkuExists = false;
+                    }
+
+                    if (!$fullSkuExists) {
                         $code = $possibleCode;
                         $qty = (int)$maybeQty;
                     }
