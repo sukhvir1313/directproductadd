@@ -46,7 +46,7 @@ class ToCart extends \Magento\Framework\App\Action\Action
         
         try {
             $this->addToCart($product_id, $coupon, $sku);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $this->_redirect("/");
         }
     }
@@ -177,7 +177,15 @@ class ToCart extends \Magento\Framework\App\Action\Action
             );
         }
         
-        $result = $this->_cart->addProduct($_product,$params);
+        try {
+            $result = $this->_cart->addProduct($_product, $params);
+        } catch (\Magento\Framework\Exception\LocalizedException $e) {
+            return array(
+                'status' => false,
+                'message' => $e->getMessage(),
+                'redirect_url' => $_product->getProductUrl()
+            );
+        }
         return array(
             'status' => true,
         );

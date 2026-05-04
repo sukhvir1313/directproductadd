@@ -71,6 +71,7 @@ You can also install the extension directly from the Magento Admin Panel. Check 
   ```
   http://{yourdomain}/dpa/add/tocart/sku/{product_sku}-{product_quantity}
   ```
+  *If the SKU itself ends in `-<number>` (for example `t-ora-75`), the module first checks whether the full SKU exists in the catalog before treating the trailing number as a quantity, so SKUs like that are still added correctly. To force a quantity in that case, append another `-<number>` segment, e.g. `t-ora-75-2`.*
 - Add multiple products with specific quantities:
   ```
   http://{yourdomain}/dpa/add/tocart/sku/{product_sku_1}-{product_quantity_1},{product_sku_2}-{product_quantity_2}
@@ -116,3 +117,4 @@ Stores -> Configuration -> SUKHVIR -> Direct Product Add
 ## **Notes**
 1. **Only Use Simple Products**: For configurable product IDs, the user will be redirected to the product page.
 2. **Store-Specific SKUs/IDs**: Ensure you use SKUs/IDs that are valid for the relevant store. Invalid SKUs/IDs will redirect users to the homepage.
+3. **Cart-Validation Failures Redirect to the Product Page**: If the product has a minimum order quantity, customizable options, or is out of stock, the customer is redirected to the product page so they can adjust the quantity or selections before continuing.

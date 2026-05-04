@@ -97,6 +97,7 @@ To ensure the best experience for your users, follow these tips when creating UR
 
 1. Always use **simple product SKUs/IDs**. If you use configurable product SKUs/IDs, customers will be redirected to the product page instead of the cart.  
 2. Use product SKUs/IDs from the **correct store view**. If the SKU or ID doesn’t match the store, users will be redirected to the homepage.
+3. **Respect product cart rules.** If the product has a minimum order quantity, customizable options, or is out of stock, the customer will be redirected to the product page so they can adjust the quantity or selections before continuing.
 
 ---
 
